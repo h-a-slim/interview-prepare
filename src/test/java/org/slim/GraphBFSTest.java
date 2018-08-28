@@ -34,6 +34,10 @@ public class GraphBFSTest {
         graph.getVertices().add(node2);
         graph.getVertices().add(node3);
 
-        GraphBFS.getAlgorithm().accept(graph);
+        GraphBFS.Input input = new GraphBFS.Input();
+        input.graph = graph;
+        input.startFrom = 2;
+
+        GraphBFS.getAlgorithm().accept(input);
     }
 }

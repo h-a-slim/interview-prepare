@@ -5,16 +5,20 @@ import java.util.function.Consumer;
 
 public class GraphBFS {
 
+    public  static class Input {
+        public Graph graph;
+        public int startFrom;
+    }
 
-    public static Consumer<Graph> getAlgorithm() {
-        return (graph) -> {
+    public static Consumer<GraphBFS.Input> getAlgorithm() {
+        return (input) -> {
 
             HashSet<GraphNode> visited = new HashSet<>();
 
             LinkedList<GraphNode> nodes = new LinkedList<>();
             ArrayList<Integer> visitedNodes = new ArrayList<>();
 
-            nodes.add(graph.getVertices().get(3));
+            nodes.add(input.graph.getVertices().get(input.startFrom));
 
             GraphNode currentNode = null;
 
