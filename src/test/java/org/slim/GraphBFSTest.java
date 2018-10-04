@@ -38,6 +38,7 @@ public class GraphBFSTest {
         input.graph = graph;
         input.startFrom = 2;
 
-        GraphBFS.getAlgorithm().accept(input);
+        GraphBFS.applyAlgorithm(input);
+
     }
 }

@@ -10,7 +10,7 @@ public class GraphBFS {
         public int startFrom;
     }
 
-    public static Consumer<GraphBFS.Input> getAlgorithm() {
+    private static Consumer<GraphBFS.Input> getAlgorithm() {
         return (input) -> {
 
             HashSet<GraphNode> visited = new HashSet<>();
@@ -34,6 +34,33 @@ public class GraphBFS {
                 }
             }
         };
+    }
+
+    public static void applyAlgorithm(GraphBFS.Input input) {
+        //GraphBFS.getAlgorithm().accept(input);
+        Consumer<GraphBFS.Input> algorithm = (in) -> {
+            HashSet<GraphNode> visited = new HashSet<>();
+
+            LinkedList<GraphNode> nodes = new LinkedList<>();
+            ArrayList<Integer> visitedNodes = new ArrayList<>();
+
+            nodes.add(input.graph.getVertices().get(input.startFrom));
+
+            GraphNode currentNode = null;
+
+            while (!nodes.isEmpty()) {
+                currentNode = nodes.poll();
+
+                if(!visitedNodes.contains(currentNode.getId())){
+                    visitedNodes.add(currentNode.getId());
+
+                    nodes.addAll(currentNode.getNeighbors());
+
+                    System.out.println("Visit Node: " + currentNode.getId());
+                }
+            }
+        };
+        algorithm.accept(input);
     }
 
 
