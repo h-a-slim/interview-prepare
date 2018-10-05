@@ -24,21 +24,35 @@ public class StreamsJ8 {
             else freq.put(elem, 1);
         });
 
+//        Map.Entry<Integer, Integer> maxFrequencyMapEntry = freq.entrySet().stream().
+//                sorted((x,y) -> {
+//                    return x.getValue() - y.getValue();
+//                }).
+//                max((x,y) -> {
+//                    return x.getValue() - y.getValue();
+//                }).orElseGet(null);
+
+
+        //better version
         Map.Entry<Integer, Integer> maxFrequencyMapEntry = freq.entrySet().stream().
-                sorted((x,y) -> {
-                    return x.getValue() > y.getValue() ? 1 : -1;
-                }).
-                max((x,y) -> {
-                    return x.getValue() > y.getValue() ? 1 : -1;
-                }).orElseGet(null);
+                sorted(Comparator.comparing(Map.Entry::getValue)).
+                max(Comparator.comparing(Map.Entry::getValue)).orElseGet(null);
 
         return maxFrequencyMapEntry.getKey();
     }
 
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+//        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
+
+        /*
+        * Sample input
+        * 6
+        * 1 4 4 4 5 3
+        * */
+
+        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));
         int arrCount = Integer.parseInt(bufferedReader.readLine().trim());
 
         List<Integer> arr = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
